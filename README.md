@@ -7,5 +7,5 @@ You can access our project on the following website: http://atalantiagames.com
 
 ### Other Links
 GDAT Website: https://epics.ecn.purdue.edu/gdat/
-EPICS Website: https://engineering.purdue.edu/EPICS
 
+EPICS Website: https://engineering.purdue.edu/EPICS
