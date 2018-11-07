@@ -19,15 +19,16 @@ public class HandDataTemplate : MonoBehaviour
     public static float leftHeight;
     public static float rightHeight;
     public static float rightGrab;
+    public static float leftGrab;
 
     //Data Scene UI elements
-   /* public Text rPinch;
-    public Text rGrab;
-    public Text rHeight;
+    /* public Text rPinch;
+     public Text rGrab;
+     public Text rHeight;
 
-    public Text lPinch;
-    public Text lGrab;
-    public Text lHeight;*/
+     public Text lPinch;
+     public Text lGrab;
+     public Text lHeight;*/
 
     //getting the system time from the user's computer
     public static string dateTime = System.DateTime.Now.ToString();
@@ -140,7 +141,7 @@ public class HandDataTemplate : MonoBehaviour
                 float leftPalmAngle = (Mathf.Acos(leftPalmDotProduct)) * (180.0f / Mathf.PI) - 90;
 
                 float leftPinch = hand.PinchStrength; //Shows on a scale of 0 to 1 how much the forefinger and thumb are pinching
-                float leftGrab = hand.GrabStrength; //Shows on a scale of 0 to 1 how much the entire hand is grasping
+                leftGrab = hand.GrabStrength; //Shows on a scale of 0 to 1 how much the entire hand is grasping
 
                 int leftExtendedFingers = 0; //Declares variable for amount of extended fingers on the left hand by one
 

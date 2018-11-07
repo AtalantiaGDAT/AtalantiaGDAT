@@ -112,7 +112,7 @@ public class MSSceneControllerFree : MonoBehaviour {
 	int proximityObjectIndex;
 	int proximityDoorIndex;
 	bool blockedInteraction = false;
-	bool pause = false;
+	bool pause = true;
 	bool error;
 	bool enterAndExitBool;
 	string sceneName;
@@ -299,10 +299,20 @@ public class MSSceneControllerFree : MonoBehaviour {
 				SceneManager.LoadScene (sceneName);
 			}
 
-			if (Input.GetKeyDown (controls.pause) && controls.enable_pause_Input) {
-				pause = !pause;
-			}
-			if (pause) {
+            //Atalantia Code
+            float currentLeftGrab = HandDataTemplate.leftGrab;
+            float currentRightGrab = HandDataTemplate.rightGrab;
+
+            if (Input.GetKeyDown(controls.pause) && controls.enable_pause_Input)
+            {
+                pause = !pause;
+            }
+            if (currentLeftGrab == 1 && currentRightGrab == 1)
+            {
+                pause = false;
+            }
+            //
+            if (pause) {
 				Time.timeScale = Mathf.Lerp (Time.timeScale, 0.0f, Time.fixedDeltaTime * 5.0f);
 			} else {
 				Time.timeScale = Mathf.Lerp (Time.timeScale, 1.0f, Time.fixedDeltaTime * 5.0f);

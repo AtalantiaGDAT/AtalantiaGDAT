@@ -974,21 +974,22 @@ public class MSVehicleControllerFree : MonoBehaviour {
         //Height Difference for steering controls
         float currentLeftHeight = HandDataTemplate.leftHeight;
         float currentRightHeight = HandDataTemplate.rightHeight;
+        float wheelDivider = UIControl.TurnDivider;
 
         float heightDifference = currentLeftHeight - currentRightHeight;
-        if (heightDifference > 70)
+        if (heightDifference > wheelDivider)
         {
             heightDifference = 1;
-            Debug.Log("Keep your right hand over the leap motion!");
+            //Debug.Log("Keep your right hand over the leap motion!");
         }
-        else if (heightDifference < -70)
+        else if (heightDifference < -wheelDivider)
         {
             heightDifference = -1;
-            Debug.Log("Keep your left hand over the leap motion!");
+            //Debug.Log("Keep your left hand over the leap motion!");
         }
         else
         {
-            heightDifference = heightDifference / 70;
+            heightDifference = heightDifference / wheelDivider;
         }
 
         //Grip for acceleration
