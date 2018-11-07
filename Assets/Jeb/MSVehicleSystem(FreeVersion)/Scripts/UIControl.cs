@@ -17,20 +17,46 @@ using UnityEngine.UI; // Required when Using UI elements.
 }*/
 
 public class UIControl : MonoBehaviour {
-    float SensitivitySlider;
     public static float TurnDivider;
+    public static int DiffVelocity;
+    public Button DiffEasy;
+    public Button DiffMedium;
+    public Button DiffHard;
+    public Slider SensitivitySlider;
+    Color SelectedColor = new Color(182,175,175);
+
     float MaxTurnDivider = 70;
 
     // Use this for initialization
     void Start () {
         TurnDivider = MaxTurnDivider;
-        SensitivitySlider = GetComponent<Slider>().value;
+        DiffVelocity = 30;
+        DiffEasy.GetComponent<Image>().color = SelectedColor;
     }
 
     // Update is called once per frame
     void Update () {
-        SensitivitySlider = GetComponent<Slider>().value;
-        TurnDivider = MaxTurnDivider * ((1-SensitivitySlider/2));
-        Debug.Log(TurnDivider);
+        //Sensitivity Values
+        TurnDivider = MaxTurnDivider * ((1-SensitivitySlider.value/2));
+
+        //Difficulty values
+        DiffHard.onClick.AddListener(() => diffSelector(3));
+        DiffMedium.onClick.AddListener(() => diffSelector(2));
+        DiffEasy.onClick.AddListener(() => diffSelector(1));
+
     }
+
+    void diffSelector(int diff)
+    {
+        if(diff == 3)
+        {
+            DiffHard.GetComponent<Image>().color = SelectedColor;
+            DiffMedium.GetComponent<Image>().color = Color.white;
+            DiffEasy.GetComponent<Image>().color = Color.white;
+
+            
+        }
+        //else if(diff == 2)
+    }
+
 }

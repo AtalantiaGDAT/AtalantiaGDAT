@@ -68,7 +68,7 @@ public class StabilizeTurnsClassFree {
 	[Range(0.0f,1.2f)][Tooltip("How much the code will stabilize the vehicle's skidding.")]
 	public float tireSlipsFactor = 0.85f;
 	[Range(0.1f,2.0f)][Tooltip("This variable defines how much lateral force the vehicle will receive when the steering wheel is rotated. This helps the vehicle to rotate more realistically.")]
-	public float helpToTurn = 0.35f;
+	public float helpToTurn = 2f;
 	[Range(0.1f,1.0f)][Tooltip("This variable defines how fast the vehicle will straighten automatically. This occurs naturally in a vehicle when it exits a curve.")]
 	public float helpToStraightenOut = 0.1f;
 	[Range(0.1f,5.0f)][Tooltip("This variable defines how much downforce the vehicle will receive. This helps to simulate a more realistic gravity, but should be set up carefully so as not to make some surreal situations.")]
@@ -157,8 +157,10 @@ public class OrbitalCameraSettingsClassFree {
 #region vehicleTorqueClass
 [Serializable]
 public class TorqueAdjustmentClassFree {
-	[Range(20,420)][Tooltip("This variable sets the maximum speed that the vehicle can achieve. It must be configured on the KMh unit")]
-	public int  maxVelocityKMh = 250;
+    [Range(20, 420)]
+    [Tooltip("This variable sets the maximum speed that the vehicle can achieve. It must be configured on the KMh unit")]
+    //
+    public int maxVelocityKMh = UIControl.DiffVelocity; //Set speed from difficulty ************ 
 	[Range(0.5f,2000.0f)][Tooltip("This variable defines the torque that the motor of the vehicle will have.")]
 	public float engineTorque = 3;
 	[Range(2,12)][Tooltip("This variable defines the number of gears that the vehicle will have.")]
@@ -970,31 +972,26 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	}
 
 	void Update(){
-    //Collect information from hand data template here
+    //************Collect information from hand data template here
         //Height Difference for steering controls
-        float currentLeftHeight = HandDataTemplate.leftHeight;
-        float currentRightHeight = HandDataTemplate.rightHeight;
-        float wheelDivider = UIControl.TurnDivider;
-
-        float heightDifference = currentLeftHeight - currentRightHeight;
-        if (heightDifference > wheelDivider)
+        float heightDifference = HandDataTemplate.leftHeight - HandDataTemplate.rightHeight;
+        if (heightDifference > UIControl.TurnDivider)
         {
             heightDifference = 1;
             //Debug.Log("Keep your right hand over the leap motion!");
         }
-        else if (heightDifference < -wheelDivider)
+        else if (heightDifference < -UIControl.TurnDivider)
         {
             heightDifference = -1;
             //Debug.Log("Keep your left hand over the leap motion!");
         }
         else
         {
-            heightDifference = heightDifference / wheelDivider;
+            heightDifference = heightDifference / UIControl.TurnDivider;
         }
 
         //Grip for acceleration
-        double currentRightGrab = HandDataTemplate.rightGrab;
-        double accelerationIndex = (currentRightGrab - .5) * 2;
+        double accelerationIndex = (HandDataTemplate.rightGrab - .5) * 2;
 
 
         //Inputs for car controls
@@ -1003,7 +1000,7 @@ public class MSVehicleControllerFree : MonoBehaviour {
 		wheelTDIsGrounded = _wheels.rightRearWheel.wheelCollider.isGrounded;
 		wheelTEIsGrounded = _wheels.leftRearWheel.wheelCollider.isGrounded;
         verticalInput = (float)accelerationIndex;//controls.verticalInput; //Accelerator car
-        horizontalInput = heightDifference; //Steering of car
+        horizontalInput = heightDifference; //controls.horizontalInput; //Steering of car
 		mouseXInput = controls.mouseXInput;
 		mouseYInput = controls.mouseYInput;
 		mouseScrollWheelInput = controls.mouseScrollWheelInput;
