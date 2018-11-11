@@ -160,7 +160,7 @@ public class TorqueAdjustmentClassFree {
     [Range(20, 420)]
     [Tooltip("This variable sets the maximum speed that the vehicle can achieve. It must be configured on the KMh unit")]
     //
-    public int maxVelocityKMh = UIControl.DiffVelocity; //Set speed from difficulty ************ 
+    public int maxVelocityKMh = 30; //Set speed from difficulty ************ 
 	[Range(0.5f,2000.0f)][Tooltip("This variable defines the torque that the motor of the vehicle will have.")]
 	public float engineTorque = 3;
 	[Range(2,12)][Tooltip("This variable defines the number of gears that the vehicle will have.")]
@@ -972,7 +972,10 @@ public class MSVehicleControllerFree : MonoBehaviour {
 	}
 
 	void Update(){
-    //************Collect information from hand data template here
+        //************Collect information from hand data template here
+        //Set Max velocity
+        _vehicleTorque.maxVelocityKMh = UIControl.DiffVelocity;
+
         //Height Difference for steering controls
         float heightDifference = HandDataTemplate.leftHeight - HandDataTemplate.rightHeight;
         if (heightDifference > UIControl.TurnDivider)
