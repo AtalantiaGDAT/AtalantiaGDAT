@@ -67,8 +67,8 @@ public class VehicleAdjustmentClassFree {
 public class StabilizeTurnsClassFree {
 	[Range(0.0f,1.2f)][Tooltip("How much the code will stabilize the vehicle's skidding.")]
 	public float tireSlipsFactor = 0.85f;
-	[Range(0.1f,2.0f)][Tooltip("This variable defines how much lateral force the vehicle will receive when the steering wheel is rotated. This helps the vehicle to rotate more realistically.")]
-	public float helpToTurn = 2f;
+	[Range(0.1f,5.0f)][Tooltip("This variable defines how much lateral force the vehicle will receive when the steering wheel is rotated. This helps the vehicle to rotate more realistically.")]
+	public float helpToTurn = 5f;
 	[Range(0.1f,1.0f)][Tooltip("This variable defines how fast the vehicle will straighten automatically. This occurs naturally in a vehicle when it exits a curve.")]
 	public float helpToStraightenOut = 0.1f;
 	[Range(0.1f,5.0f)][Tooltip("This variable defines how much downforce the vehicle will receive. This helps to simulate a more realistic gravity, but should be set up carefully so as not to make some surreal situations.")]
