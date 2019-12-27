@@ -65,3 +65,8 @@
 *.gz filter=lfs diff=lfs merge=lfs -text
 *.rar filter=lfs diff=lfs merge=lfs -text
 *.tar filter=lfs diff=lfs merge=lfs -text
+
+# Line Endings
+*.sln eol=crlf
+*.csproj eol=crlf
+*.asset eol=lf
